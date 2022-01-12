@@ -51,7 +51,7 @@
         </tr>
         <tr
           v-for="transaction in transactions"
-          :key="transaction.id"
+          :key="transaction.prismaid"
           class="transaction"
           @click="openDetails(transaction)"
         >
@@ -207,7 +207,7 @@ export default {
       try {
         const transactions = await axios.post("http://localhost:4000/api", {
           query:
-            `{transactionsInPeriod(start: "${this.date.year}-${this.startDate}", end: "${this.date.year}-${this.endDate}" ) {id, createdAt, updatedAt, transactionDate, account, description, category, reference, currency, amount, status}}`,
+            `{transactionsInPeriod(start: "${this.date.year}-${this.startDate}", end: "${this.date.year}-${this.endDate}" ) {prismaid, id, createdAt, updatedAt, transactionDate, account, description, category, reference, currency, amount, status}}`,
         });
         this.transactions = transactions.data.data.transactionsInPeriod;
       } catch (err) {
@@ -221,7 +221,7 @@ export default {
     try {
       const transactions = await axios.post("http://localhost:4000/api", {
         query:
-          "{transactions {id, createdAt, updatedAt, transactionDate, account, description, category, reference, currency, amount, status}}",
+          "{transactions {prismaid, id, createdAt, updatedAt, transactionDate, account, description, category, reference, currency, amount, status}}",
       });
       this.transactions = transactions.data.data.transactions;
     } catch (err) {
