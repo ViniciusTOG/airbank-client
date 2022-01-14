@@ -5,7 +5,7 @@
       class="month-picker-container"
     >
       <MonthPickerInput
-        @change="showDate"
+        v-model="date"
         :defaultYear="2020"
         placeholder="Select a date range"
         :maxDate="maxDate"
@@ -137,12 +137,7 @@ export default {
       transactionDetails: {},
       details: false,
       loading: false,
-      date: {
-				from: null,
-				to: null,
-				month: null,
-				year: null
-			},
+      date: {},
     }
   },
   async created() {
@@ -188,7 +183,7 @@ export default {
       return new Date("2020-01-01");
     },
     isEmpty() {
-      return this.transactions.length === 0
+      return this.transactions === null ||this.transactions.length === 0
     }
   },
   methods: {
