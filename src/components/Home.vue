@@ -194,9 +194,6 @@ export default {
     closeDetails() {
       this.details = false
     },
-    showDate (date) {
-			this.date = date
-		},
     async filterByDate() {
       this.loading = true
       try {
